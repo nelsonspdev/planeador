@@ -45,6 +45,10 @@ function initializeGisClient() {
             if (tokenResponse && tokenResponse.access_token) {
                 accessToken = tokenResponse.access_token;
                 gapi.auth.setToken(tokenResponse);
+                
+                // NEW: Save the session flag to local memory so the browser remembers the link
+                localStorage.setItem('planner_session_active', 'true');
+                
                 updateAuthUI(true);
                 syncStatus.textContent = 'Sincronizando nubes...';
                 await checkOrCreatePlannerFile();
@@ -57,7 +61,19 @@ function initializeGisClient() {
 }
 
 function checkEnginesReady() {
-    if (gapiInited && gisInited) btnLogin.disabled = false;
+    if (gapiInited && gisInited) {
+        btnLogin.disabled = false;
+        
+        // NEW: Check if there is an active historical session flag
+        const isSessionPersistent = localStorage.getItem('planner_session_active');
+        
+        if (isSessionPersistent === 'true' && tokenClient) {
+            console.log("Persistent session detected. Initializing silent handshake with Google API...");
+            syncStatus.textContent = 'Autoconectando...';
+            // prompt: 'none' requests the token silently without popping up any UI windows
+            tokenClient.requestAccessToken({ prompt: 'none' });
+        }
+    }
 }
 
 // --- DYNAMIC GEOLOCATION & WEATHER ENGINE ---
@@ -305,13 +321,19 @@ async function createNewPlannerFile() {
 
 function setupEventListeners() {
     btnLogin.addEventListener('click', () => tokenClient && tokenClient.requestAccessToken({ prompt: '' }));
+    
     btnLogout.addEventListener('click', () => {
         accessToken = null;
         plannerFileId = null;
+        
+        // NEW: Completely erase the session flag from browser local storage
+        localStorage.removeItem('planner_session_active');
+        
         updateAuthUI(false);
         for (let i = 1; i <= 14; i++) document.getElementById(`day-${i}`).value = "";
         document.querySelectorAll('.calendar-events-container').forEach(el => el.innerHTML = '');
     });
+    
     btnSync.addEventListener('click', savePlannerToDrive);
 }
 
