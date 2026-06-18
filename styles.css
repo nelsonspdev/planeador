@@ -1,0 +1,198 @@
+/* ==========================================================================
+   1. General Base Styles
+   ========================================================================== */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 20px;
+    color: #333;
+}
+
+/* ==========================================================================
+   2. Header & Navigation Layout
+   ========================================================================== */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 15px;
+    flex-wrap: wrap; /* Wraps cleanly on narrower mobile screens */
+}
+
+/* Target the title using both the tag and class for safety */
+header h1, .app-title, .titulo-setup {
+    font-size: 1.5rem; /* Reduced font size to maximize button space */
+    color: #1a73e8;
+    margin: 0;
+    white-space: nowrap; /* Keeps title strictly on one line */
+}
+
+/* Flexbox container for auth buttons and status */
+#auth-controls, .header-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Clean, modern spacing between elements */
+}
+
+/* ==========================================================================
+   3. Buttons & UI Elements
+   ========================================================================== */
+.btn {
+    background-color: #1a73e8;
+    color: white;
+    border: none;
+    padding: 6px 12px; /* Compact padding for tighter alignment */
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.2s;
+}
+
+.btn:hover {
+    background-color: #1557b0;
+}
+
+.btn-secondary {
+    background-color: #34a853;
+}
+
+.btn-secondary:hover {
+    background-color: #2d8b44;
+}
+
+.hidden {
+    display: none !important;
+}
+
+#sync-status {
+    font-size: 0.9rem;
+    color: #666;
+    font-weight: 500;
+    background: #e2e8f0;
+    padding: 6px 12px;
+    border-radius: 20px;
+}
+
+/* ==========================================================================
+   4. Planner Grid System
+   ========================================================================== */
+.planner-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+    gap: 25px;
+}
+
+.week-section {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+}
+
+.week-section h2 {
+    margin-top: 0;
+    color: #202124;
+    font-size: 1.4rem;
+    border-bottom: 2px solid #f1f3f4;
+    padding-bottom: 8px;
+}
+
+.days-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+/* ==========================================================================
+   5. Day Cards & Input Areas
+   ========================================================================== */
+.day-card {
+    background: #f8f9fa;
+    border: 1px solid #dadce0;
+    border-radius: 8px;
+    padding: 12px;
+    position: relative; /* Context for weather ribbon absolute positioning */
+}
+
+.day-card strong {
+    display: block;
+    color: #3c4043;
+    font-size: 1rem;
+    margin-bottom: 6px;
+}
+
+.day-card textarea {
+    width: 100%;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    padding: 8px;
+    font-family: inherit;
+    font-size: 0.95rem;
+    resize: vertical;
+    box-sizing: border-box;
+    outline: none;
+}
+
+.day-card textarea:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 0 2px rgba(26,115,232,0.2);
+}
+
+/* ==========================================================================
+   6. Weather Ribbon Module
+   ========================================================================== */
+.weather-ribbon {
+    position: absolute;
+    top: 8px;
+    right: 12px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: #5f6368;
+    background: #e8f0fe;
+    padding: 2px 8px;
+    border-radius: 12px;
+}
+
+.weather-icon {
+    font-size: 1rem;
+}
+
+/* ==========================================================================
+   7. Google Calendar Integration Module
+   ========================================================================== */
+.calendar-controls {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.95rem;
+    color: #3c4043;
+}
+
+.calendar-events-container {
+    margin-top: 8px;
+    padding-top: 6px;
+    border-top: 1px dashed #dadce0;
+}
+
+.calendar-event-item {
+    font-size: 0.85rem;
+    background: #e8f0fe;
+    color: #1a73e8;
+    padding: 4px 8px;
+    border-radius: 4px;
+    margin-bottom: 4px;
+    border-left: 3px solid #1a73e8;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Utility to toggle visibility dynamically */
+.hidden-calendar .calendar-events-container {
+    display: none !important;
+}

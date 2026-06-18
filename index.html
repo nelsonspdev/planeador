@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Planeador Semanal</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <!-- Título principal con clase optimizada para pantallas pequeñas -->
+        <h1 class="app-title">Mi Planeador Semanal</h1>
+        
+        <!-- Bloque de autenticación y sincronización con Drive -->
+        <div id="auth-controls" class="header-buttons">
+            <button id="btn-login" class="btn">Conectar Google Drive</button>
+            <button id="btn-logout" class="btn hidden">Cerrar Sesión</button>
+            <button id="btn-sync" class="btn hidden">Sincronizar Ahora</button>
+            <span id="sync-status">Desconectado</span>
+        </div>
+    </header>
+
+    <main>
+        <div class="planner-container">
+            <!-- Sección de la semana en curso -->
+            <section class="week-section">
+                <h2>Esta Semana</h2>
+                <div class="days-grid" id="grid-week-1"></div>
+            </section>
+
+            <!-- Sección de la semana entrante -->
+            <section class="week-section">
+                <h2>Próxima Semana</h2>
+                <div class="days-grid" id="grid-week-2"></div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Librerías oficiales de Google Identity Services y API Client -->
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <script src="https://apis.google.com/js/api.js" async defer></script>
+    
+    <!-- Script de la aplicación diferido (defer) para asegurar la carga previa de las APIs de Google -->
+    <script src="app.js" defer></script>
+</body>
+</html>
